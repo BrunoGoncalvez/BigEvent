@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { EventService } from '../services/event.service';
 
 declare function initStyle() : any;
 
@@ -27,7 +27,7 @@ export class EventsComponent implements OnInit, AfterContentChecked {
     this.filteredEvents = this._searchEvent ? this.filterEvents(this._searchEvent) : this.events;
   }
 
-  constructor(public http: HttpClient) { }
+  constructor(private eventService : EventService) { }
 
   ngOnInit(): void {
     this.getEvents();
@@ -38,7 +38,7 @@ export class EventsComponent implements OnInit, AfterContentChecked {
   }
 
   public getEvents() : void{
-    this.http.get('https://localhost:5001/api/events').subscribe(
+    this.eventService.getEvents().subscribe(
       response => {
         this.events = response;
         this.filteredEvents = response
