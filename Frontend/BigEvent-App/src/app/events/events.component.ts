@@ -4,6 +4,7 @@ import { Component, OnInit, AfterContentChecked, TemplateRef } from '@angular/co
 import { EventService } from '../services/event.service';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
 declare function initStyle() : any;
@@ -27,7 +28,11 @@ export class EventsComponent implements OnInit, AfterContentChecked {
   public showImage: boolean = false;
 
   // Constructor
-  constructor(private eventService : EventService, private modalService: BsModalService,private toastr: ToastrService) { }
+  constructor(
+    private eventService : EventService,
+    private modalService: BsModalService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService) { }
 
   //#region Search Methods
 
@@ -45,6 +50,7 @@ export class EventsComponent implements OnInit, AfterContentChecked {
 
   //#region Cyrcle Life Methods
   public ngOnInit(): void {
+    this.spinner.show();
     this.getEvents();
   }
 
@@ -56,13 +62,18 @@ export class EventsComponent implements OnInit, AfterContentChecked {
 
   public getEvents() : void{
 
-    this.eventService.getEvents().subscribe(
-      (evs : Event[]) => {
+    this.eventService.getEvents().subscribe({
+      next: (evs: Event[]) => {
         this.events = evs;
-        this.filteredEvents = evs;
+        this.filteredEvents = this.events;
       },
-      error => { console.log("Error: " + error) }
-    );
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Error load Events', 'Error!');
+        console.log(error)
+      },
+      complete: () => { this.spinner.hide(); }
+    });
   }
 
   public filterEvents(textFilter : string) : Event[]{
