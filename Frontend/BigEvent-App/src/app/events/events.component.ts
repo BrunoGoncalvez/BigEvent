@@ -1,7 +1,10 @@
+import { Event } from '../models/Event';
+
 import { Component, OnInit, AfterContentChecked, TemplateRef } from '@angular/core';
 import { EventService } from '../services/event.service';
-import { Event } from '../models/Event';
+
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 declare function initStyle() : any;
 
@@ -17,11 +20,16 @@ export class EventsComponent implements OnInit, AfterContentChecked {
   // Constants Modal
   public modalRef?: BsModalRef;
 
-  private _searchEvent : string = "";
 
+  private _searchEvent : string = "";
   public events : Event[] = [];
   public filteredEvents : Event[] = [];
   public showImage: boolean = false;
+
+  // Constructor
+  constructor(private eventService : EventService, private modalService: BsModalService,private toastr: ToastrService) { }
+
+  //#region Search Methods
 
   public get searchEvent() : string{
     return this._searchEvent;
@@ -32,9 +40,10 @@ export class EventsComponent implements OnInit, AfterContentChecked {
     this.filteredEvents = this._searchEvent ? this.filterEvents(this._searchEvent) : this.events;
   }
 
-  // Constructor
-  constructor(private eventService : EventService, private modalService: BsModalService) { }
+  //#endregion
 
+
+  //#region Cyrcle Life Methods
   public ngOnInit(): void {
     this.getEvents();
   }
@@ -42,6 +51,8 @@ export class EventsComponent implements OnInit, AfterContentChecked {
   public ngAfterContentChecked(): void {
     initStyle();
   }
+  //#endregion
+
 
   public getEvents() : void{
 
@@ -75,6 +86,7 @@ export class EventsComponent implements OnInit, AfterContentChecked {
 
   confirm(): void {
     this.modalRef?.hide();
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
   decline(): void {
