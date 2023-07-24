@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { EventService } from '../services/event.service';
+import { Event } from '../models/Event';
 
 declare function initStyle() : any;
 
@@ -12,11 +13,11 @@ declare function initStyle() : any;
 
 export class EventsComponent implements OnInit, AfterContentChecked {
 
-  public events : any = [];
-  public filteredEvents : any = [];
-
-  public showImage: boolean = false;
   private _searchEvent : string = "";
+
+  public events : Event[] = [];
+  public filteredEvents : Event[] = [];
+  public showImage: boolean = false;
 
   public get searchEvent() : string{
     return this._searchEvent;
@@ -29,28 +30,37 @@ export class EventsComponent implements OnInit, AfterContentChecked {
 
   constructor(private eventService : EventService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getEvents();
   }
 
-  ngAfterContentChecked(): void {
+  public ngAfterContentChecked(): void {
     initStyle();
   }
 
   public getEvents() : void{
+
     this.eventService.getEvents().subscribe(
-      response => {
-        this.events = response;
-        this.filteredEvents = response
-      },
-      error => console.log( error )
+      (evs : Event[]) => {
+        this.events = evs;
+        this.filteredEvents = evs;
+      }, error => { console.log("Error: " + error) }
+      // {
+      //   next: (evs : Event[]) => {
+      //     this.events = evs;
+      //     this.filteredEvents = evs;
+      //   },
+      //   error: (error) => {
+      //     console.log( error )
+      //   }
+      // }
     );
   }
 
-  public filterEvents(textFilter : string) : any{
+  public filterEvents(textFilter : string) : Event[]{
     textFilter = textFilter.toLocaleLowerCase();
     return this.events.filter(
-      (event : any) => event.theme.toLocaleLowerCase().indexOf(textFilter) !== -1
+      (event : Event) => event.theme.toLocaleLowerCase().indexOf(textFilter) !== -1
       || event.local.toLocaleLowerCase().indexOf(textFilter) !== -1
     )
   }
