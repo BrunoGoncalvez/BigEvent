@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, TemplateRef } from '@angular/core';
 import { EventService } from '../services/event.service';
 import { Event } from '../models/Event';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 declare function initStyle() : any;
 
@@ -12,6 +13,9 @@ declare function initStyle() : any;
 })
 
 export class EventsComponent implements OnInit, AfterContentChecked {
+
+  // Constants Modal
+  public modalRef?: BsModalRef;
 
   private _searchEvent : string = "";
 
@@ -28,7 +32,8 @@ export class EventsComponent implements OnInit, AfterContentChecked {
     this.filteredEvents = this._searchEvent ? this.filterEvents(this._searchEvent) : this.events;
   }
 
-  constructor(private eventService : EventService) { }
+  // Constructor
+  constructor(private eventService : EventService, private modalService: BsModalService) { }
 
   public ngOnInit(): void {
     this.getEvents();
@@ -44,16 +49,8 @@ export class EventsComponent implements OnInit, AfterContentChecked {
       (evs : Event[]) => {
         this.events = evs;
         this.filteredEvents = evs;
-      }, error => { console.log("Error: " + error) }
-      // {
-      //   next: (evs : Event[]) => {
-      //     this.events = evs;
-      //     this.filteredEvents = evs;
-      //   },
-      //   error: (error) => {
-      //     console.log( error )
-      //   }
-      // }
+      },
+      error => { console.log("Error: " + error) }
     );
   }
 
@@ -68,4 +65,22 @@ export class EventsComponent implements OnInit, AfterContentChecked {
   public showImage_Click() : void {
     this.showImage = !this.showImage;
   }
+
+
+  //#region Modal Functions
+
+  openModal(template: TemplateRef<any>) : void {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  confirm(): void {
+    this.modalRef?.hide();
+  }
+
+  decline(): void {
+    this.modalRef?.hide();
+  }
+
+  //#endregion
+
 }

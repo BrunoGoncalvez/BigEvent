@@ -37,11 +37,15 @@
       <td>{{ event.theme }}</td>
       <td>{{ event.local }}</td>
       <td>{{ event.eventDate | DateFormatPipe }}</td>
-      <td>{{ event.allotments.length ? event.allotments[0].name : "Empty"}}</td>
-      <td>{{ event.maximumGuests }}</td>
-      <td>
-        <button class="btn btn-warning btn-sm mr-2"><i class="fa-solid fa-pen-to-square"></i></button>
-        <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+      <td>{{ event.maximumGuests <= 0 ? 'Undefined' : event.maximumGuests }}</td>
+      <td>{{ event.allotments.length ? event.allotments[0].name : "Undefined"}}</td>
+      <td [noWrap]="true">
+        <button class="btn btn-warning btn-sm mr-2" tooltip="Edit">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button class="btn btn-danger btn-sm" tooltip="Delete" (click)="openModal(template)">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
       </td>
     </tr>
   </tbody>
@@ -53,3 +57,13 @@
     </tr>
   </tfoot>
 </table>
+
+
+<!-- Modal -->
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>

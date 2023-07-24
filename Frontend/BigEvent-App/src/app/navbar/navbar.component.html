@@ -1,15 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">BigEvent</a>
-    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"    aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [collapse]="isCollapsed" [isAnimated]="true">
-      <div class="navbar-nav">
+    <div class="collapse navbar-collapse mr-auto" id="navbarNavAltMarkup" [collapse]="isCollapsed" [isAnimated]="true">
+      <div class="navbar-nav mr-auto">
         <a class="nav-link active" aria-current="page" href="#">Home</a>
         <a class="nav-link" href="#">Events</a>
         <a class="nav-link" href="#">Speakers</a>
       </div>
+
+      <!-- Start Dropdown Profile -->
+      <div class="navbar-nav mr-3">
+        <div class="nav-item dropdown" dropdown>
+          <a dropdownToggle class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Name User
+          </a>
+          <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#"><i class="far fa-id-card"></i> Profile</a>
+            <div role="separator" class="divider"></div>
+            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a>
+          </div>
+        </div>
+      </div>
+      <!-- End Dropdown Profile -->
     </div>
   </div>
 </nav>
