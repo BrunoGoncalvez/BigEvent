@@ -13,39 +13,39 @@
 <!-- Event table -->
 <table class="table table-striped mt-2">
   <thead class="thead-dark">
-    <tr>
+    <tr class="text-center">
       <th (click)="showImage_Click()">
         <button class="btn btn-sm btn-outline-light">
           {{ showImage ? "Hide" : "Show" }} <i [class]="showImage ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
         </button>
       </th>
       <th>#</th>
-      <th>Theme</th>
+      <th>Title</th>
       <th>Local</th>
       <th>Date</th>
-      <th>Maximum Guests</th>
+      <th>MAX. Guests</th>
       <th>Allotment</th>
       <th>Options</th>
     </tr>
   </thead>
   <tbody *ngIf="events && events.length">
-    <tr *ngFor="let event of filteredEvents">
+    <tr *ngFor="let event of filteredEvents" class="text-center">
       <td>
         <img [collapse]="!showImage" [isAnimated]="true" src="/assets/images/{{ event.imageUrl }}" [style.width.px]="120" alt="">
       </td>
-      <td>{{ event.eventId }}</td>
+      <td>{{ event.id }}</td>
       <td>{{ event.theme }}</td>
       <td>{{ event.local }}</td>
-      <td>{{ event.eventDate }}</td>
+      <td>{{ event.eventDate | DateFormatPipe }}</td>
+      <td>{{ event.allotments.length ? event.allotments[0].name : "Empty"}}</td>
       <td>{{ event.maximumGuests }}</td>
-      <td>{{ event.allotment }}</td>
       <td>
         <button class="btn btn-warning btn-sm mr-2"><i class="fa-solid fa-pen-to-square"></i></button>
         <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
       </td>
     </tr>
   </tbody>
-  <tfoot *ngIf="!events">
+  <tfoot *ngIf="!events.length">
     <tr>
       <td colspan="8" class="text-center">
         <h4>No events found</h4>
