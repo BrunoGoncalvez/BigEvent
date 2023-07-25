@@ -1,6 +1,4 @@
-<h3 class="mt-5">Events</h3>
-
-<hr>
+<app-title-page></app-title-page>
 
 <!-- Input Search Event -->
 <form action="" class="form-inline">
@@ -31,7 +29,7 @@
   <tbody *ngIf="events && events.length">
     <tr *ngFor="let event of filteredEvents" class="text-center">
       <td>
-        <img [collapse]="!showImage" [isAnimated]="true" src="/assets/images/{{ event.imageUrl }}" [style.width.px]="120" alt="">
+        <img [collapse]="!showImage" [isAnimated]="true" src="/Frontend/BigEvent-App/src/assets/images/{{event.imageUrl }}" [style.width.px]="120" alt="">
       </td>
       <td>{{ event.id }}</td>
       <td>{{ event.theme }}</td>

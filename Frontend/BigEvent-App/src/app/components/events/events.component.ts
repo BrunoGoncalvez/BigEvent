@@ -1,7 +1,7 @@
-import { Event } from '../models/Event';
+import { Event } from '../../models/Event';
 
 import { Component, OnInit, AfterContentChecked, TemplateRef } from '@angular/core';
-import { EventService } from '../services/event.service';
+import { EventService } from '../../services/event.service';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
