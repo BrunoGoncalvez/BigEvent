@@ -21,8 +21,10 @@ import { AppComponent } from './app.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EventsComponent } from './components/events/events.component';
+import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { SpeakersComponent } from './components/speakers/speakers.component';
 import { TitlePageComponent } from './shared/components/titlePage/titlePage.component';
 
@@ -37,7 +39,9 @@ import { EventService } from './services/event.service';
     DashboardComponent,
     DateTimeFormatPipe,
     EventsComponent,
+    HomeComponent,
     NavbarComponent,
+    NotFoundPageComponent,
     ProfileComponent,
     SpeakersComponent,
     TitlePageComponent
