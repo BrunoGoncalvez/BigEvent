@@ -1,12 +1,17 @@
 
 <div class="container">
-  <app-title-page [title]="'Events'"></app-title-page>
+  <app-title-page
+    [title]="'Events'"
+    [icon]="'fa fa-calendar-alt'"
+    [subtitle]="'All Events'"
+    [enableButton]="true"></app-title-page>
 
   <!-- Input Search Event -->
   <form action="" class="form-inline">
     <div class="form-group m-2">
       <input type="text" class="form-control mr-2" placeholder="Search Event"
-      [(ngModel)]="searchEvent" [ngModelOptions]="{standalone: true}">
+        [(ngModel)]="searchEvent"
+        [ngModelOptions]="{standalone: true}">
     </div>
   </form>
 
@@ -31,7 +36,7 @@
     <tbody *ngIf="events && events.length">
       <tr *ngFor="let event of filteredEvents" class="text-center">
         <td>
-          <img [collapse]="!showImage" [isAnimated]="true" src="/Frontend/BigEvent-App/src/assets/images/{{event.imageUrl }}" [style.width.px]="120" alt="">
+          <img [collapse]="!showImage" [isAnimated]="true" src="../../../assets/images/{{ event.imageUrl }}" [style.width.px]="120" alt="">
         </td>
         <td>{{ event.id }}</td>
         <td>{{ event.theme }}</td>

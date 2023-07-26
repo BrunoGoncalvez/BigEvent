@@ -1,5 +1,7 @@
 <div class="container">
-  <app-title-page [title]="'Speakers'"></app-title-page>
+  <app-title-page
+    [title]="'Speakers'"
+    [enableButton]="true"></app-title-page>
 
   <div>
     <p *ngFor="let speaker of speakers"><b>Name: </b>{{speaker.name}} <br> <b>Age: </b> {{ speaker.age }}</p>
