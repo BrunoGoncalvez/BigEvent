@@ -8,6 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TitlePageComponent implements OnInit {
 
   @Input() title: string = "";
+  @Input() icon: string = "fa fa-user";
+  @Input() subtitle: string = "Since 2023";
+  @Input() enableButton: Boolean = false;
 
   constructor() { }
 
