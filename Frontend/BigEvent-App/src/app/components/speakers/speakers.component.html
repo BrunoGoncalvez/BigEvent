@@ -1,7 +1,9 @@
-<p>Component Speakers</p>
+<div class="container">
+  <app-title-page [title]="'Speakers'"></app-title-page>
 
-<div>
-  <p *ngFor="let speaker of speakers"><b>Name: </b>{{speaker.name}} <br> <b>Age: </b> {{ speaker.age }}</p>
+  <div>
+    <p *ngFor="let speaker of speakers"><b>Name: </b>{{speaker.name}} <br> <b>Age: </b> {{ speaker.age }}</p>
+  </div>
 </div>
 
 
