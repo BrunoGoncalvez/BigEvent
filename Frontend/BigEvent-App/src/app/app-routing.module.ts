@@ -19,6 +19,7 @@ const routes: Routes = [
     { path: 'details', component: DetailEventComponent },
     { path: 'details/:id', component: DetailEventComponent }
   ] },
+  { path: 'events', redirectTo: '/events/list'},
   { path: 'speakers', component: SpeakersComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'contacts', component: ContactsComponent },
