@@ -20,6 +20,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DetailEventComponent } from './components/events/detail-event/detail-event.component';
 import { EventsComponent } from './components/events/events.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -31,12 +32,14 @@ import { TitlePageComponent } from './shared/components/titlePage/titlePage.comp
 // Services and Pipes
 import { DateTimeFormatPipe } from './helpers/pipes/DateTimeFormat.pipe';
 import { EventService } from './services/event.service';
+import { ListEventsComponent } from './components/events/list-events/list-events.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactsComponent,
     DashboardComponent,
+    DetailEventComponent,
     DateTimeFormatPipe,
     EventsComponent,
     HomeComponent,
@@ -44,7 +47,8 @@ import { EventService } from './services/event.service';
     NotFoundPageComponent,
     ProfileComponent,
     SpeakersComponent,
-    TitlePageComponent
+    TitlePageComponent,
+    ListEventsComponent
    ],
   imports: [
     BrowserModule,
