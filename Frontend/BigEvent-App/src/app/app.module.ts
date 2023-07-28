@@ -33,6 +33,7 @@ import { TitlePageComponent } from './shared/components/titlePage/titlePage.comp
 import { DateTimeFormatPipe } from './helpers/pipes/DateTimeFormat.pipe';
 import { EventService } from './services/event.service';
 import { ListEventsComponent } from './components/events/list-events/list-events.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ListEventsComponent } from './components/events/list-events/list-events
     ProfileComponent,
     SpeakersComponent,
     TitlePageComponent,
-    ListEventsComponent
+    ListEventsComponent,
+    UserComponent
    ],
   imports: [
     BrowserModule,
