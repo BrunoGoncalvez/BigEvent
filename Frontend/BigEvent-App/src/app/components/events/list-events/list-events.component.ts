@@ -1,22 +1,19 @@
-import { Event } from '../models/Event';
-
 import { Component, OnInit, AfterContentChecked, TemplateRef } from '@angular/core';
-import { EventService } from '../services/event.service';
-
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { EventService } from 'src/app/services/event.service';
+
+import { Event } from '../../../models/Event';
 
 declare function initStyle() : any;
 
-
 @Component({
-  selector: 'app-events',
-  templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss']
+  selector: 'app-list-events',
+  templateUrl: './list-events.component.html',
+  styleUrls: ['./list-events.component.scss']
 })
-
-export class EventsComponent implements OnInit, AfterContentChecked {
+export class ListEventsComponent implements OnInit, AfterContentChecked {
 
   // Constants Modal
   public modalRef?: BsModalRef;

@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="card rounded shadow-sm p-3">
+
+    <!-- Input Search Event -->
+    <div class="d-flex">
+      <div class="flex-fill pr-3">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <label class="input-group-text">Search</label>
+          </div>
+          <input type="text" class="form-control" placeholder="Search Event" [(ngModel)]="searchEvent">
+        </div>
+      </div>
+
+      <div>
+        <a routerLink="/events/details" class="d-flex btn btn-outline-primary">
+          <i class="fa fa-plus-circle my-1"></i>
+          <b class="ml-1 d-none d-sm-block">New</b>
+        </a>
+      </div>
+    </div>
+
+    <!-- Event table -->
+    <table class="table table-striped mt-2">
+      <thead class="thead-dark">
+        <tr class="text-center">
+          <th class="d-none d-md-table-cell" (click)="showImage_Click()">
+            <button class="btn btn-sm btn-outline-light">
+              {{ showImage ? "Hide" : "Show" }} <i
+                [class]="showImage ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+            </button>
+          </th>
+          <th>#</th>
+          <th>Title</th>
+          <th class="d-none d-md-table-cell">Local</th>
+          <th>Date</th>
+          <th class="d-none d-md-table-cell">MAX. Guests</th>
+          <th class="d-none d-md-table-cell">Allotment</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="events && events.length">
+        <tr *ngFor="let event of filteredEvents" class="text-center">
+          <td class="d-none d-md-table-cell">
+            <img [collapse]="!showImage" [isAnimated]="true" src="/assets/images/{{ event.imageUrl }}"
+              [style.width.px]="120" alt="">
+          </td>
+          <td>{{ event.id }}</td>
+          <td>{{ event.theme }}</td>
+          <td class="d-none d-md-table-cell">{{ event.local }}</td>
+          <td>{{ event.eventDate | DateFormatPipe }}</td>
+          <td class="d-none d-md-table-cell">{{ event.maximumGuests <= 0 ? 'Undefined' : event.maximumGuests }}</td>
+          <td class="d-none d-md-table-cell">{{ event.allotments.length ? event.allotments[0].name : "Undefined"}}</td>
+          <td [noWrap]="true">
+            <button class="btn btn-warning btn-sm mr-2" tooltip="Edit">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button class="btn btn-danger btn-sm" tooltip="Delete" (click)="openModal(template)">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="!events.length">
+        <tr>
+          <td colspan="8" class="text-center">
+            <h4>No events found</h4>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <ng-template #template>
+    <div class="modal-body text-center">
+      <p>Do you want to confirm?</p>
+      <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
+  </ng-template>
+</div>

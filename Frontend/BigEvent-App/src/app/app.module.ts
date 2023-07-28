@@ -18,21 +18,37 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 // Components
 import { AppComponent } from './app.component';
-import { EventsComponent } from './events/events.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SpeakersComponent } from './speakers/speakers.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DetailEventComponent } from './components/events/detail-event/detail-event.component';
+import { EventsComponent } from './components/events/events.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { SpeakersComponent } from './components/speakers/speakers.component';
+import { TitlePageComponent } from './shared/components/titlePage/titlePage.component';
 
-// Services
+// Services and Pipes
 import { DateTimeFormatPipe } from './helpers/pipes/DateTimeFormat.pipe';
 import { EventService } from './services/event.service';
+import { ListEventsComponent } from './components/events/list-events/list-events.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ContactsComponent,
+    DashboardComponent,
+    DetailEventComponent,
+    DateTimeFormatPipe,
     EventsComponent,
-    SpeakersComponent,
+    HomeComponent,
     NavbarComponent,
-    DateTimeFormatPipe
+    NotFoundPageComponent,
+    ProfileComponent,
+    SpeakersComponent,
+    TitlePageComponent,
+    ListEventsComponent
    ],
   imports: [
     BrowserModule,
