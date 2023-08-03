@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { EventService } from 'src/app/services/event.service';
 
 import { Event } from '../../../models/Event';
+import { Router } from '@angular/router';
 
 declare function initStyle() : any;
 
@@ -29,7 +30,8 @@ export class ListEventsComponent implements OnInit, AfterContentChecked {
     private eventService : EventService,
     private modalService: BsModalService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService,
+    private router: Router) { }
 
   //#region Search Methods
 
@@ -71,6 +73,12 @@ export class ListEventsComponent implements OnInit, AfterContentChecked {
       },
       complete: () => { this.spinner.hide(); }
     });
+  }
+
+  detailsEvent(id: number) : void {
+    // this.router.navigate([`/${this.title.toLocaleLowerCase()}/list`]);
+    // this.router.navigate([`/events/details/${ id }`]);
+    this.router.navigate([`/events/details/${id}`]);
   }
 
   public filterEvents(textFilter : string) : Event[]{

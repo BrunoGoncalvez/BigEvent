@@ -23,7 +23,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DetailEventComponent } from './components/events/detail-event/detail-event.component';
 import { EventsComponent } from './components/events/events.component';
 import { HomeComponent } from './components/home/home.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { SpeakersComponent } from './components/speakers/speakers.component';
@@ -33,6 +33,9 @@ import { TitlePageComponent } from './shared/components/titlePage/titlePage.comp
 import { DateTimeFormatPipe } from './helpers/pipes/DateTimeFormat.pipe';
 import { EventService } from './services/event.service';
 import { ListEventsComponent } from './components/events/list-events/list-events.component';
+import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { RegistrationComponent } from './components/user/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { ListEventsComponent } from './components/events/list-events/list-events
     ProfileComponent,
     SpeakersComponent,
     TitlePageComponent,
-    ListEventsComponent
+    ListEventsComponent,
+    UserComponent,
+    LoginComponent,
+    RegistrationComponent
    ],
   imports: [
     BrowserModule,
