@@ -2,10 +2,10 @@ import { Component, OnInit, AfterContentChecked, TemplateRef } from '@angular/co
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { EventService } from 'src/app/services/event.service';
-
-import { Event } from '../../../models/Event';
 import { Router } from '@angular/router';
+
+import { EventService } from '@app/services/event.service';
+import { Event } from '@app/models/Event';
 
 declare function initStyle() : any;
 

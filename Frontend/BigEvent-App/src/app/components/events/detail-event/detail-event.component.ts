@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Constants } from '@app/utils/constants';
 
 @Component({
   selector: 'app-detail-event',
@@ -7,9 +9,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailEventComponent implements OnInit {
 
-  constructor() { }
+  form!: FormGroup;
+  public messageFieldRequired: string = "Field Required";
+
+  get f() : any{
+    return this.form.controls;
+  }
+
+  public validation() : void{
+
+    this.form = this.formBuilder.group({
+
+      email: ["", [ Validators.required, Validators.email ]],
+      eventDate: ["", [ Validators.required ]],
+      imageUrl: ["", [ Validators.required ]],
+      local: ["", [  Validators.required ]],
+      maximumGuest: ["", [ Validators.required, Validators.max(120000) ]],
+      phone: ["", [ Validators.required, Validators.pattern(Constants.PATTERN_PHONE) ]],
+      theme: ["", [ Validators.required, Validators.minLength(4), Validators.maxLength(50) ]]
+
+    });
+
+  }
+
+  public resetForm() : void{
+    this.form.reset();
+  }
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.validation();
   }
 
 }

@@ -1,6 +1,6 @@
 // Libs Angular
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -64,6 +64,7 @@ import { RegistrationComponent } from './components/user/registration/registrati
     FormsModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
+    ReactiveFormsModule,
     TooltipModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 5000,
