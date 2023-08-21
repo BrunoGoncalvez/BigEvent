@@ -7,36 +7,46 @@
       </div>
     </div>
     <div class="col-md-6" style="height: 450px;">
-      <form class="p-3">
+      <form class="p-3" [formGroup]="form" >
         <div class="pb-2 d-block d-md-none">
           <h3 class="border-bottom">Sign up User</h3>
         </div>
         <div class="form-row">
           <div class="form-group col-sm-6">
             <label>First Name</label>
-            <input type="text" class="form-control" placeholder="Enter your first name" />
+            <input type="text" class="form-control" formControlName="firstName" [ngClass]="{ 'is-invalid': f.firstName.errors && f.firstName.touched }" placeholder="Enter your first name" />
+            <span class="invalid-feedback" *ngIf="f.firstName.errors?.required">{{ messageFieldRequired }}</span>
           </div>
           <div class="form-group col-sm-6">
             <label>Last Name</label>
-            <input type="text" class="form-control" placeholder="Enter your last name" />
+            <input type="text" class="form-control" formControlName="lastName" [ngClass]="{ 'is-invalid': f.lastName.errors && f.lastName.touched }" placeholder="Enter your last name" />
+            <span class="invalid-feedback" *ngIf="f.lastName.errors?.required">{{ messageFieldRequired }}</span>
           </div>
         </div>
         <div class="form-group">
           <label for="">Email:</label>
-          <input class="form-control" type="text" placeholder="Enter your email" />
+          <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }" placeholder="Enter your email" />
+          <span class="invalid-feedback" *ngIf="f.email.errors?.required">{{ messageFieldRequired }}</span>
+          <span class="invalid-feedback" *ngIf="f.email.errors?.email">Enter a valid email address</span>
         </div>
         <div class="form-group">
           <label for="">User:</label>
-          <input class="form-control" type="text" placeholder="Enter your user name" />
+          <input class="form-control" type="text" formControlName="userName" [ngClass]="{ 'is-invalid': f.userName.errors && f.userName.touched }" placeholder="Enter your user name" />
+          <span class="invalid-feedback" *ngIf="f.userName.errors?.required">{{ messageFieldRequired }}</span>
         </div>
         <div class="form-row">
           <div class="form-group col-sm-6">
             <label for="">Password:</label>
-            <input class="form-control" type="password" placeholder="Enter your password" />
+            <input class="form-control" type="password" formControlName="password" [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }" placeholder="Enter your password" />
+            <span class="invalid-feedback" *ngIf="f.password.errors?.required">{{ messageFieldRequired }}</span>
+            <span class="invalid-feedback" *ngIf="f.password.errors?.minlength">Password must be 6 or more characters.</span>
           </div>
           <div class="form-group col-sm-6">
             <label for="">Confirm Password:</label>
-            <input class="form-control" type="password" placeholder="Confirm your password" />
+            <input class="form-control" type="password" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': f.confirmPassword.errors && f.confirmPassword.touched }" placeholder="Confirm your password" />
+            <span class="invalid-feedback" *ngIf="f.confirmPassword.errors?.required">{{ messageFieldRequired }}</span>
+            <span class="invalid-feedback" *ngIf="f.confirmPassword.errors?.minlength">Password must be 6 or more characters.</span>
+            <span class="invalid-feedback" *ngIf="f.confirmPassword.errors?.mustMatch">Passwords must be equals</span>
           </div>
         </div>
         <div class="form-row p-1 mb-3">
