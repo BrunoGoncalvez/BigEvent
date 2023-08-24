@@ -3,7 +3,6 @@ using System;
 using BigEvent.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BigEvent.Data.Migrations
@@ -15,28 +14,26 @@ namespace BigEvent.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64)
+                .HasAnnotation("ProductVersion", "5.0.17");
 
             modelBuilder.Entity("BigEvent.Core.Models.Allotment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id_allotment")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("id_allotment");
 
                     b.Property<int>("EventId")
                         .HasColumnType("int")
                         .HasColumnName("event_id");
 
                     b.Property<DateTime?>("FinishDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("finish_date");
 
                     b.Property<DateTime?>("InitialDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("initial_date");
 
                     b.Property<int>("LimitGuests")
@@ -44,11 +41,11 @@ namespace BigEvent.Data.Migrations
                         .HasColumnName("limit_guest");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("num_allotment");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)")
+                        .HasColumnType("decimal(65,30)")
                         .HasColumnName("price_allotment");
 
                     b.HasKey("Id");
@@ -63,23 +60,22 @@ namespace BigEvent.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("event_Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("event_Id");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("email_event");
 
                     b.Property<DateTime?>("EventDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("event_date");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("imageUrl");
 
                     b.Property<string>("Local")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("local");
 
                     b.Property<int>("MaximumGuests")
@@ -87,11 +83,11 @@ namespace BigEvent.Data.Migrations
                         .HasColumnName("maximum_guests");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("phone_event");
 
                     b.Property<string>("Theme")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("theme");
 
                     b.HasKey("Id");
@@ -104,15 +100,14 @@ namespace BigEvent.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("id");
 
                     b.Property<int?>("EventId")
                         .HasColumnType("int")
                         .HasColumnName("event_id");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("name_social_media");
 
                     b.Property<int?>("SpeakerId")
@@ -120,7 +115,7 @@ namespace BigEvent.Data.Migrations
                         .HasColumnName("speaker_id");
 
                     b.Property<string>("URL")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("url_social_media");
 
                     b.HasKey("Id");
@@ -137,30 +132,29 @@ namespace BigEvent.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id_speaker")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("id_speaker");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("email_speaker");
 
                     b.Property<int?>("EventId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("name_speaker");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("phone_speaker");
 
                     b.Property<string>("PhotoUrl")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("photo_speaker_url");
 
                     b.Property<string>("ResumeHistory")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("resume_speaker");
 
                     b.HasKey("Id");
@@ -202,11 +196,13 @@ namespace BigEvent.Data.Migrations
                 {
                     b.HasOne("BigEvent.Core.Models.Event", "Event")
                         .WithMany("SocialMedias")
-                        .HasForeignKey("EventId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BigEvent.Core.Models.Speaker", "Speaker")
                         .WithMany("SocialMedias")
-                        .HasForeignKey("SpeakerId");
+                        .HasForeignKey("SpeakerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Event");
 

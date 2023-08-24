@@ -20,9 +20,8 @@ namespace BigEvent.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddContextApplication(Configuration);
-            services.AddDependencyInjections();
+            // Extensions for Resolve Dependency Injection
+            services.ResolveDependencyInjections(Configuration);
 
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors();
