@@ -5,7 +5,7 @@
 
 <!-- Perfil User -->
 <div class="card rounded shadow-sm">
-  <form>
+  <form [formGroup]="form">
     <div class="row p-3">
       <div class="col-lg-3 pt-1">
         <div class="card mb-3">
@@ -19,7 +19,7 @@
           </div>
           <div class="card-body">
             <div class="h4 text-center mb-3">@UserName</div>
-            <div class="h7 text-bold pb-1"><b>Nome:</b> Miracles Lee Cross</div>
+            <div class="h7 text-bold pb-1"><b>Name:</b> Miracles Lee Cross</div>
             <div class="h7">
               Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
               etc.
@@ -30,11 +30,11 @@
               <div class="row">
                 <div class="col-6 text-center border-right">
                   <div class="h5">1342</div>
-                  <div class="h6 text-muted">Eventos Ministrados</div>
+                  <div class="h6 text-muted">Ministered Events</div>
                 </div>
                 <div class="col-6 text-center">
                   <div class="h5">1342</div>
-                  <div class="h6 text-muted">Eventos Participados</div>
+                  <div class="h6 text-muted">Participation in events</div>
                 </div>
               </div>
             </li>
@@ -48,64 +48,78 @@
             <h3 class="border-bottom">Detalhe Perfil</h3>
           </div>
           <div class="form-group col">
-            <label>Título</label>
-            <select class="form-control">
+            <label>Education</label>
+            <select formControlName="education" class="form-control" type="text" formControlName="education" [ngClass]="{ 'is-invalid': f.education.errors && f.education.touched }">
               <option value=""></option>
-              <option value="0">Não Quero</option>
-              <option value="Senhorita">Tecnólogo(a)</option>
-              <option value="Senhorita">Bacharel</option>
-              <option value="Senhorita">Especialista</option>
-              <option value="Senhorita">Pós Graduado(a)</option>
-              <option value="Senhorita">Mestre</option>
-              <option value="Senhorita">Doutor(a)</option>
-              <option value="Senhorita">Pós Doc</option>
+              <option value="0">Not to inform</option>
+              <option value="Senhorita">Technologist</option>
+              <option value="Senhorita">Bachelor</option>
+              <option value="Senhorita">Specialist</option>
+              <option value="Senhorita">Post-graduate</option>
+              <option value="Senhorita">Teacher</option>
+              <option value="Senhorita">Doctor</option>
+              <option value="Senhorita">Other</option>
             </select>
+            <span class="invalid-feedback" *ngIf="f.occupation.errors?.required">{{ messageFieldRequired }}</span>
           </div>
           <div class="form-group col-sm-5">
-            <label>Primeiro Nome</label>
-            <input type="text" class="form-control"/>
-
+            <label>First Name</label>
+            <input type="text" class="form-control" formControlName="firstName" [ngClass]="{ 'is-invalid': f.firstName.errors && f.firstName.touched }" placeholder="Enter your first name" />
+            <span class="invalid-feedback" *ngIf="f.firstName.errors?.required">{{ messageFieldRequired }}</span>
           </div>
           <div class="form-group col-sm-5">
-            <label>Último nome</label>
-            <input type="text" class="form-control"/>
-
+            <label>Last Name</label>
+            <input type="text" class="form-control" formControlName="lastName" [ngClass]="{ 'is-invalid': f.lastName.errors && f.lastName.touched }" placeholder="Enter your last name" />
+            <span class="invalid-feedback" *ngIf="f.lastName.errors?.required">{{ messageFieldRequired }}</span>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-sm-5">
             <label>E-mail</label>
-            <input type="text" class="form-control" />
+            <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }" placeholder="Enter your email" />
+            <span class="invalid-feedback" *ngIf="f.email.errors?.required">{{ messageFieldRequired }}</span>
+            <span class="invalid-feedback" *ngIf="f.email.errors?.email">Enter a valid email address</span>
           </div>
           <div class="form-group col-sm-4">
-            <label>Telefone</label>
-            <input type="text" class="form-control" />
+            <label>Phone <small>(00) 91234-1234</small></label>
+            <input type="text" [ngClass]="{'is-invalid' : f.phone.errors && f.phone.touched}" pattern="(\([0-9]{2}\))\s([9]{1})?([0-9]{4})-([0-9]{4})"
+              class="form-control" formControlName="phone" placeholder="(00) 91234-1234">
+            <span class="invalid-feedback" *ngIf="f.phone.errors?.required">{{ messageFieldRequired }}</span>
+            <span class="invalid-feedback" *ngIf="f.phone.errors?.pattern">Phone must follow the pattern.</span>
           </div>
           <div class="form-group col-sm">
-            <label>Função</label>
-            <select class="form-control">
+            <label>Occupation</label>
+            <select formControlName="occupation" class="form-control" type="text" formControlName="occupation" [ngClass]="{ 'is-invalid': f.occupation.errors && f.occupation.touched }">
               <option value=""></option>
-              <option value="Participante">Participante</option>
-              <option value="Palestrante">Palestrante</option>
+              <option value="Participant">Participant</option>
+              <option value="Speaker">Speaker</option>
             </select>
+            <span class="invalid-feedback" *ngIf="f.occupation.errors?.required">{{ messageFieldRequired }}</span>
           </div>
-          <form-group class="col-12">
-            <label>Descrição</label>
-            <input type="text" class="form-control" />
-          </form-group>
+          <div class="form-group col-12">
+            <label>Desciption</label>
+            <input class="form-control" type="text" formControlName="description" [ngClass]="{ 'is-invalid': f.description.errors && f.description.touched }" placeholder="Description User" />
+            <span class="invalid-feedback" *ngIf="f.description.errors?.required">{{ messageFieldRequired }}</span>
+            <span class="invalid-feedback" *ngIf="f.description.errors?.minlength">Description must be 20 or more characters.</span>
+          </div>
         </div>
         <div>
-          <h3 class="pt-3 border-bottom">Mudar Senha</h3>
-          <p>Caso mude de senha, preencha os campos abaixo:</p>
+          <h3 class="pt-3 border-bottom">Change Password</h3>
+          <p>Change Password, fill in the fields below:</p>
         </div>
         <div class="form-row">
           <div class="form-group col-sm">
-            <label>Senha</label>
-            <input type="password" class="form-control" />
+            <label for="">Password:</label>
+            <input class="form-control" type="password" formControlName="password" [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }" placeholder="Enter your password" />
+            <span class="invalid-feedback" *ngIf="f.password.errors?.required">{{ messageFieldRequired }}</span>
+            <span class="invalid-feedback" *ngIf="f.password.errors?.minlength">Password must be 6 or more characters.</span>
           </div>
           <div class="form-group col-sm">
-            <label>Confirmar Senha</label>
-            <input type="password" class="form-control" />
+            <label for="">Confirm Password:</label>
+            <input class="form-control" type="password" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': f.confirmPassword.errors && f.confirmPassword.touched }" placeholder="Confirm your password" />
+            <span class="invalid-feedback" *ngIf="f.confirmPassword.errors?.required">{{ messageFieldRequired }}</span>
+            <span class="invalid-feedback" *ngIf="f.confirmPassword.errors?.minlength">Password must be 6 or more characters.</span>
+            <span class="invalid-feedback" *ngIf="f.confirmPassword.errors?.mustMatch">Passwords must be equals</span>
           </div>
         </div>
       </div>
@@ -113,11 +127,11 @@
     <div class="card-footer">
       <div class="d-flex">
         <button class="btn btn-outline-secondary mr-auto border">
-          Cancelar Alteração
+          Cancel
         </button>
         <button class="btn btn-success">
           <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
-          Salvar Alteração
+          Save
         </button>
       </div>
     </div>

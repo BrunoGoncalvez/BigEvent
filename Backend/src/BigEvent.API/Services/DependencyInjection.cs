@@ -9,13 +9,23 @@ using BigEvent.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Runtime.CompilerServices;
 
 namespace BigEvent.API.Services
 {
     public static class DependencyInjection
     {
-        
-        public static void AddDependencyInjections(this IServiceCollection services)
+
+        public static void ResolveDependencyInjections(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDependencyInjections();
+            services.AddContextApplication(configuration);
+            services.AutoMapperResolve();
+        }
+
+
+        private static void AddDependencyInjections(this IServiceCollection services)
         {
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IEventService, EventService>();
@@ -23,9 +33,15 @@ namespace BigEvent.API.Services
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
         }
 
-        public static void AddContextApplication(this IServiceCollection services, IConfiguration configuration)
+        private static void AddContextApplication(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<DataContext>(context => context.UseSqlServer(configuration.GetConnectionString("connectionString")));
+            var connString = configuration.GetConnectionString("connectionMySQL");
+            services.AddDbContext<DataContext>(context => context.UseMySql(connString, ServerVersion.AutoDetect(connString)));
+        }
+
+        private static void AutoMapperResolve(this IServiceCollection services)
+        {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
     }
