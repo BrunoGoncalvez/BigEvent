@@ -1,12 +1,14 @@
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 
-using BigEvent.Core.Models;
 using BigEvent.Application.Contracts;
 using BigEvent.Application.Resources;
+using BigEvent.Application.ModelsDTO;
+
 
 namespace BigEvent.API.Controllers
 {
@@ -63,7 +65,7 @@ namespace BigEvent.API.Controllers
         {
             try
             {
-                var events = await this._eventService.GetEventByTheme(theme, false);
+                var events = await this._eventService.GetEventsByTheme(theme, false);
 
                 if(events == null)
                     return NotFound("Events not found");
@@ -77,7 +79,7 @@ namespace BigEvent.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Event model)
+        public async Task<IActionResult> Post(EventDTO model)
         {
             try
             {
@@ -87,12 +89,12 @@ namespace BigEvent.API.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception(e.Message); 
             }
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Put(int id, Event model)
+        public async Task<IActionResult> Put(int id, EventDTO model)
         {
 
             try

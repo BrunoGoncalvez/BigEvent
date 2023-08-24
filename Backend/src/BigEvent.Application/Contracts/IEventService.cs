@@ -1,8 +1,7 @@
-using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-using BigEvent.Core.Models;
+using BigEvent.Application.ModelsDTO;
 
 namespace BigEvent.Application.Contracts
 {
@@ -10,19 +9,19 @@ namespace BigEvent.Application.Contracts
     {
         
         // General Methods
-        Task<Event> AddEvent(Event model);
+        Task<EventDTO> AddEvent(EventDTO model);
 
-        Task<Event> UpdateEvent(int eventId, Event model);
+        Task<EventDTO> UpdateEvent(int eventId, EventDTO model);
 
         Task<bool> DeleteEvent(int eventId);
 
 
         // Specific Methods
-        Task<Event> GetEventById(int eventId, bool includeSpeakers);
+        Task<EventDTO> GetEventById(int eventId, bool includeSpeakers);
 
-        Task<IEnumerable<Event>> GetAllEvents(bool includeSpeakers);
+        Task<IEnumerable<EventDTO>> GetAllEvents(bool includeSpeakers);
 
-        Task<IEnumerable<Event>> GetEventByTheme(string theme, bool includeSpeakers); 
+        Task<IEnumerable<EventDTO>> GetEventsByTheme(string theme, bool includeSpeakers); 
 
 
     }

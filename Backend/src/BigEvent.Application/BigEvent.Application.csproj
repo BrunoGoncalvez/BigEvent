@@ -1,11 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+	</ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\BigEvent.Core\BigEvent.Core.csproj" />
     <ProjectReference Include="..\BigEvent.Data\BigEvent.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+	
+	
+  <ItemGroup>	  
     <Compile Update="Resources\ErrorMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -26,8 +36,5 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
 
 </Project>
