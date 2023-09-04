@@ -14,6 +14,7 @@ namespace BigEvent.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasCharSet(null, DelegationModes.ApplyToDatabases)
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.17");
 

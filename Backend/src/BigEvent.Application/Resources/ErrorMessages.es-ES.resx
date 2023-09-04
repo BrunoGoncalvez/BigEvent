@@ -123,4 +123,7 @@
   <data name="EventNotFound" xml:space="preserve">
     <value>Evento no encontrado</value>
   </data>
+  <data name="FieldRequired" xml:space="preserve">
+    <value>Campo obligatorio</value>
+  </data>
 </root>

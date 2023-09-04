@@ -77,5 +77,14 @@ namespace BigEvent.Application.Resources {
                 return ResourceManager.GetString("EventNotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Required field.
+        /// </summary>
+        public static string FieldRequired {
+            get {
+                return ResourceManager.GetString("FieldRequired", resourceCulture);
+            }
+        }
     }
 }

@@ -24,6 +24,9 @@ namespace BigEvent.Data.Context
         // Config ForeignKey - Many to Many
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.HasCharSet(null, DelegationModes.ApplyToDatabases);
+
             // When the speaker table is created it will be the junction of eventId and speakerId
             modelBuilder.Entity<SpeakerEvent>()
                 .HasKey(speakerEvent => new { speakerEvent.EventId, speakerEvent.SpeakerId });

@@ -30,8 +30,8 @@ namespace BigEvent.API.Controllers
             {
                 var events = await this._eventService.GetAllEvents(false);
 
-                if(events == null)
-                    return NotFound("Events not found");
+                if (events == null)
+                    return NoContent();
 
                 return Ok(events);
             }
@@ -50,7 +50,7 @@ namespace BigEvent.API.Controllers
                 var ev = await this._eventService.GetEventById(id, false);
 
                 if(ev == null)
-                    return NotFound(ErrorMessages.EventNotFound);
+                    return NoContent();
 
                 return Ok(ev);
             }
@@ -68,7 +68,7 @@ namespace BigEvent.API.Controllers
                 var events = await this._eventService.GetEventsByTheme(theme, false);
 
                 if(events == null)
-                    return NotFound("Events not found");
+                    return NoContent();
 
                 return Ok(events);
             }
@@ -118,12 +118,12 @@ namespace BigEvent.API.Controllers
                 var ev = await this._eventService.GetEventById(id, false);
                 if(ev == null) return BadRequest("Error delete event");
 
-                await this._eventService.DeleteEvent(id);
+                await this._eventService.DeleteEvent(22);
                 return Ok(ev);
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Error: {e.Message}");
             }
         }
 
