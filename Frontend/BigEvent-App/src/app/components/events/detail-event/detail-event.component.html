@@ -4,7 +4,7 @@
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Theme</label>
-          <input type="text" [ngClass]="{'is-invalid' : f.theme.errors && f.theme.touched}"
+          <input type="text" [ngClass]="formValidator(f.theme)"
             class="form-control" formControlName="theme" placeholder="Insira o Tema">
           <span class="invalid-feedback" *ngIf="f.theme.errors?.required">{{ messageFieldRequired }}</span>
           <span class="invalid-feedback" *ngIf="f.theme.errors?.minlength">Theme must be 4 or more characters.</span>
@@ -14,14 +14,14 @@
       <div class="form-row">
         <div class="form-group col-md-8">
           <label>Local</label>
-          <input type="text" [ngClass]="{'is-invalid' : f.local.errors && f.local.touched}"
+          <input type="text" [ngClass]="formValidator(f.local)"
             class="form-control" formControlName="local" placeholder="">
           <span class="invalid-feedback" *ngIf="f.local.errors?.required">{{ messageFieldRequired }}</span>
         </div>
 
         <div class="form-group col-md-4">
           <label>Date and Time</label>
-          <input type="datetime-local" [ngClass]="{'is-invalid' : f.eventDate.errors && f.eventDate.touched}"
+          <input type="datetime-local" [ngClass]="formValidator(f.eventDate)"
             class="form-control" formControlName="eventDate" placeholder="">
             <span class="invalid-feedback" *ngIf="f.eventDate.errors?.required">{{ messageFieldRequired }}</span>
         </div>
@@ -30,14 +30,14 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label>Guests Limit</label>
-          <input type="number" [ngClass]="{'is-invalid' : f.maximumGuest.errors && f.maximumGuest.touched}"
+          <input type="number" [ngClass]="formValidator(f.maximumGuest)"
             class="form-control" formControlName="maximumGuest" placeholder="">
             <span class="invalid-feedback" *ngIf="f.maximumGuest.errors?.required">{{ messageFieldRequired }}</span>
         </div>
 
         <div class="form-group col-md-3">
           <label>Phone <small>(00) 91234-1234</small></label>
-          <input type="text" [ngClass]="{'is-invalid' : f.phone.errors && f.phone.touched}" pattern="(\([0-9]{2}\))\s([9]{1})?([0-9]{4})-([0-9]{4})"
+          <input type="text" [ngClass]="formValidator(f.phone)" pattern="{{patternPhone}}"
             class="form-control" formControlName="phone" placeholder="(00) 91234-1234">
             <span class="invalid-feedback" *ngIf="f.phone.errors?.required">{{ messageFieldRequired }}</span>
             <span class="invalid-feedback" *ngIf="f.phone.errors?.pattern">Pattern Phone</span>
@@ -45,7 +45,7 @@
 
         <div class="form-group col-md-4">
           <label>Email</label>
-          <input type="email" [ngClass]="{'is-invalid' : f.email.errors && f.email.touched}"
+          <input type="email" [ngClass]="formValidator(f.email)"
             class="form-control" formControlName="email" placeholder="e-mail">
             <span class="invalid-feedback" *ngIf="f.email.errors?.required">{{ messageFieldRequired }}</span>
             <span class="invalid-feedback" *ngIf="f.email.errors?.email">Enter a valid email address</span>
@@ -53,7 +53,7 @@
 
         <div class="form-group col-md-2">
           <label>Image</label>
-          <input type="file" [ngClass]="{'is-invalid' : f.imageUrl.errors && f.imageUrl.touched}"
+          <input type="file" [ngClass]="formValidator(f.imageUrl)"
             class="form-control" formControlName="imageUrl" accept="image/png, image/jpeg">
             <span class="invalid-feedback" *ngIf="f.imageUrl.errors?.required">{{ messageFieldRequired }}</span>
         </div>

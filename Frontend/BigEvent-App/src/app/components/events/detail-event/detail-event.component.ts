@@ -11,6 +11,7 @@ export class DetailEventComponent implements OnInit {
 
   form!: FormGroup;
   public messageFieldRequired: string = "Field Required";
+  public patternPhone = Constants.PATTERN_PHONE;
 
   get f() : any{
     return this.form.controls;
@@ -30,6 +31,10 @@ export class DetailEventComponent implements OnInit {
 
     });
 
+  }
+
+  public formValidator(fieldForm: FormControl) : any{
+    return {'is-invalid' : fieldForm.errors && fieldForm.touched};
   }
 
   public resetForm() : void{
