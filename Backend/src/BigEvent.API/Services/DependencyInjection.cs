@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Runtime.CompilerServices;
+using MySqlConnector;
 
 namespace BigEvent.API.Services
 {
@@ -35,7 +36,7 @@ namespace BigEvent.API.Services
 
         private static void AddContextApplication(this IServiceCollection services, IConfiguration configuration)
         {
-            var connString = configuration.GetConnectionString("connectionMySQL");
+            var connString = configuration.GetConnectionString("ProductionAzure");
             services.AddDbContext<DataContext>(context => context.UseMySql(connString, ServerVersion.AutoDetect(connString)));
         }
 

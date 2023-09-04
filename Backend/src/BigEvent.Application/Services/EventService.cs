@@ -2,12 +2,12 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
+using AutoMapper;
+
 using BigEvent.Application.Contracts;
+using BigEvent.Application.ModelsDTO;
 using BigEvent.Core.Contracts;
 using BigEvent.Core.Models;
-using BigEvent.Application.ModelsDTO;
-using AutoMapper;
-using Microsoft.Extensions.Logging;
 
 namespace BigEvent.Application.Services
 {

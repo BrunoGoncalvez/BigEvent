@@ -9,13 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BigEvent.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230822154025_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230830024145_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasCharSet(null, DelegationModes.ApplyToDatabases)
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.17");
 

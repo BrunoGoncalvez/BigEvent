@@ -4,37 +4,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BigEvent.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
-
             migrationBuilder.CreateTable(
                 name: "events",
                 columns: table => new
                 {
                     event_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    local = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    local = table.Column<string>(type: "longtext", nullable: true),
                     event_date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    theme = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    theme = table.Column<string>(type: "longtext", nullable: true),
                     maximum_guests = table.Column<int>(type: "int", nullable: false),
-                    imageUrl = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    phone_event = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    imageUrl = table.Column<string>(type: "longtext", nullable: true),
+                    phone_event = table.Column<string>(type: "longtext", nullable: true),
                     email_event = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_events", x => x.event_Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "allotments",
@@ -42,8 +33,7 @@ namespace BigEvent.Data.Migrations
                 {
                     id_allotment = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    num_allotment = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    num_allotment = table.Column<string>(type: "longtext", nullable: true),
                     price_allotment = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     limit_guest = table.Column<int>(type: "int", nullable: false),
                     initial_date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -59,8 +49,7 @@ namespace BigEvent.Data.Migrations
                         principalTable: "events",
                         principalColumn: "event_Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "speakers",
@@ -68,16 +57,11 @@ namespace BigEvent.Data.Migrations
                 {
                     id_speaker = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name_speaker = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    resume_speaker = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    photo_speaker_url = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    phone_speaker = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    email_speaker = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    name_speaker = table.Column<string>(type: "longtext", nullable: true),
+                    resume_speaker = table.Column<string>(type: "longtext", nullable: true),
+                    photo_speaker_url = table.Column<string>(type: "longtext", nullable: true),
+                    phone_speaker = table.Column<string>(type: "longtext", nullable: true),
+                    email_speaker = table.Column<string>(type: "longtext", nullable: true),
                     EventId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -89,8 +73,7 @@ namespace BigEvent.Data.Migrations
                         principalTable: "events",
                         principalColumn: "event_Id",
                         onDelete: ReferentialAction.Restrict);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "social_medias",
@@ -98,10 +81,8 @@ namespace BigEvent.Data.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name_social_media = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    url_social_media = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    name_social_media = table.Column<string>(type: "longtext", nullable: true),
+                    url_social_media = table.Column<string>(type: "longtext", nullable: true),
                     event_id = table.Column<int>(type: "int", nullable: true),
                     speaker_id = table.Column<int>(type: "int", nullable: true)
                 },
@@ -120,8 +101,7 @@ namespace BigEvent.Data.Migrations
                         principalTable: "speakers",
                         principalColumn: "id_speaker",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "speaker_event",
@@ -145,8 +125,7 @@ namespace BigEvent.Data.Migrations
                         principalTable: "speakers",
                         principalColumn: "id_speaker",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_allotments_event_id",
